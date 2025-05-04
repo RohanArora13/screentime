@@ -36,7 +36,7 @@ from PyQt5.QtChart import (
     QPieSeries,
     QPieSlice,
 )
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QEvent, QSize
 from PyQt5.QtGui import QBrush, QColor, QIcon, QPainter
 from PyQt5.QtWidgets import (
     QApplication,
@@ -67,9 +67,18 @@ end_time = time()
 start_time = time()
 
 package_dir = os.path.abspath(os.path.dirname(__file__))
-db_dir = os.path.join(package_dir, constants.db_name)
+appdata_dir = os.path.join(os.environ["LOCALAPPDATA"], constants.software_name)
+# db_dir = os.path.join(package_dir, constants.db_name)
+try:
+    os.makedirs(appdata_dir, exist_ok=True)
+except FileExistsError:
+    appdata_dir = os.path.join(
+        os.environ["LOCALAPPDATA"], constants.software_name + str(2)
+    )
+    os.makedirs(appdata_dir, exist_ok=True)
 
-db_name = db_dir
+db_path = os.path.join(appdata_dir, constants.db_name)
+db_name = db_path
 full_name_current = ""
 full_name_previous = ""
 isShown = True
@@ -237,6 +246,13 @@ class MainWindow(QMainWindow):
         # hide window
         self.hide()
         isShown = False
+
+    def event(self, event):
+        """Override event handler to detect window activation."""
+        if event.type() == QEvent.WindowActivate:
+            # print("Window activated, refreshing...") # Optional: for debugging
+            self.onRefresh(None) # Call refresh when window becomes active
+        return super(MainWindow, self).event(event) # Call base class implementation
 
     def onRefresh(self, event):
 
@@ -414,13 +430,29 @@ class MainWindow(QMainWindow):
             self.comeback.setVisible(False)
 
         # get is empty from database if isEmpty than show no data
-        # available text box
+        # available text boxgit add --all
         isEmpty = main_dict.get("isEmpty")
         if isEmpty != None:
             self.comeback.setVisible(True)
-            self.comeback.setText("No Data Available !!")
+            self.comeback.setText("No Data") # Updated text
+            # Apply styling for the alert box
+            self.comeback.setStyleSheet("""
+                QLabel {
+                    background-color: #4a4a4a; /* Darker grey background */
+                    border: 1px solid #666; /* Subtle border */
+                    border-radius: 10px; /* Curved corners */
+                    padding: 15px; /* Padding inside the box */
+                    color: white; /* Text color */
+                    qproperty-alignment: AlignCenter; /* Center align text */
+                    font-size: 13pt; /* Match existing font size */
+                    font-weight: bold; /* Match existing font weight */
+                    font-family: 'Myanmar Text'; /* Match existing font family */
+                }
+            """)
         else:
             self.comeback.setVisible(False)
+            # Optionally reset the stylesheet if needed when data is present
+            # self.comeback.setStyleSheet("color : rgb(255, 255, 255);") # Reset to default or remove style
 
     def changeDate(self, goto):
         global current_date
@@ -705,7 +737,7 @@ def checkDBandTable():
 
 
 def shouldPrint():
-    return False
+    return True
 
 
 def printSoftwareInfo():
@@ -813,7 +845,7 @@ def updateDatabase(program, time_taken, full_name, db_name):
     #    timestamp TEXT NOT NULL)
 
     try:
-
+        print("updating table try")
         con = sqlite3.connect(db_name)
         c = con.cursor()
         c.execute(
@@ -846,10 +878,10 @@ def updateDatabase(program, time_taken, full_name, db_name):
         if shouldPrint():
             print("added to database")
 
-    except:
+    except Exception as e:
 
         if shouldPrint():
-            print("updating table failed")
+            print("updating table failed " + str(e))
         # print('updating table failed') if shouldPrint()
 
 
