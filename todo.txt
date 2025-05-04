@@ -1,0 +1,13 @@
+
+(required)
+- remove title bar (minimize, maximize,close) and make custom buttons inside the UI
+- replace sqlite3 with sqlcyhier
+- hide data file in windows (rename file)
+- add message when there is no data available 
+- on crash send crash data to a server (will decide where)
+- encrypt database with password
+
+(optional)
+- also add a graph for weekly usage
+- add animation on mouse hover and highlights in graph
+

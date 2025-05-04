@@ -1,0 +1,13 @@
+pyinstaller --icon=icon.ico --add-data "main.ui;." --noconsole screentime.py
+pyinstaller --icon=icon.ico --noconsole --windowed screentime.py
+pyinstaller --icon=icon.ico --onefile --noconsole updater.py
+
+
+
+
+
+
+
+
+pyinstaller --icon=icon.ico --add-data "main.ui;." --add-data "icon.png;." --add-data "refresh.png;." --add-data "right_arrow.png;." --add-data "systray.png;." --add-data "icon.ico;." --add-data "left_arrow.png;." --noconsole --onedir --contents-directory "." screentime.py
+

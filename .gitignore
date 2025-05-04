@@ -1,0 +1,6 @@
+/build
+/dist
+/website
+pyinstaller cmd.bat
+__pycache__
+*.spec

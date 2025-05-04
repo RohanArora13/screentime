@@ -1,0 +1,2 @@
+python screentimee.pyw
+pause

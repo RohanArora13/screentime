@@ -1,0 +1,1 @@
+rmdir /s "C:\Scraping\OneDrive\Documents\ScreenTime\version 3\dist\screentime"
