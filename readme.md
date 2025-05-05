@@ -17,6 +17,5 @@ Free software to track your software usage and Screen time in windows!
 ## Download installer
 download the simple **ScreentimeIntaller.exe**
 
-[![Static Badge](https://img.shields.io/badge/Google%20Drive-0dd7f5)](https://github.com/hpcaitech/public_assets/tree/main/colossalai/contact/slack)
-[![Static Badge](https://img.shields.io/badge/Mega-d1390b)](https://github.com/hpcaitech/public_assets/tree/main/colossalai/contact/slack)
-[![Static Badge](https://img.shields.io/badge/Github%20File-00ae36)](https://github.com/hpcaitech/public_assets/tree/main/colossalai/contact/slack)
+[![Static Badge](https://img.shields.io/badge/Google%20Drive-0dd7f5)](https://drive.google.com/file/d/1LuN_BYy9maEd86dOWfK5GJA1MCmIWZB1/view?usp=sharing)
+[![Static Badge](https://img.shields.io/badge/Github%20File-00ae36)](https://github.com/RohanArora13/screentime/releases/download/latest/ScreentimeInstaller.exe)
