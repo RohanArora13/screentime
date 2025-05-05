@@ -2,7 +2,7 @@
 
 # ScreenTime
 
-Free software to track your software usage in windows!
+Free software to track your software usage and Screen time in windows!
 
 
 ## Screenshot
